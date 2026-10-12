@@ -1,0 +1,2141 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Al Andalus Grade 7 Science | The Great Cell Carnival & Cell City Quest</title>
+  <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@500;600;700&family=Nunito:wght@600;700;800&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg-deep: #0b1026;
+      --bg-card: #161f42;
+      --bg-panel: #1f2b59;
+      --neon-cyan: #00f2fe;
+      --neon-green: #00e676;
+      --neon-pink: #ff2e93;
+      --neon-gold: #ffd54f;
+      --neon-purple: #b388ff;
+      --neon-orange: #ff9100;
+      --text-light: #f4f7ff;
+      --text-muted: #b0c4de;
+      --danger: #ff5252;
+      --success: #00e676;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: 'Nunito', sans-serif;
+      background: radial-gradient(circle at 20% 20%, #1c2756 0%, #0b1026 60%, #060917 100%);
+      color: var(--text-light);
+      min-height: 100vh;
+      overflow-x: hidden;
+      position: relative;
+    }
+
+    /* Floating Background Organelles */
+    .bio-bg {
+      position: fixed;
+      inset: 0;
+      pointer-events: none;
+      z-index: 0;
+      overflow: hidden;
+    }
+    .floating-cell {
+      position: absolute;
+      border-radius: 50%;
+      filter: blur(2px);
+      opacity: 0.14;
+      animation: floatCell 18s infinite ease-in-out alternate;
+    }
+    .fc-1 { width: 220px; height: 220px; background: radial-gradient(circle, var(--neon-cyan), transparent 70%); top: 8%; left: 5%; }
+    .fc-2 { width: 300px; height: 300px; background: radial-gradient(circle, var(--neon-pink), transparent 70%); bottom: 10%; right: 6%; animation-duration: 24s; }
+    .fc-3 { width: 180px; height: 180px; background: radial-gradient(circle, var(--neon-green), transparent 70%); top: 50%; left: 80%; animation-duration: 15s; }
+    .fc-4 { width: 150px; height: 150px; background: radial-gradient(circle, var(--neon-gold), transparent 70%); bottom: 25%; left: 15%; animation-duration: 21s; }
+
+    @keyframes floatCell {
+      0% { transform: translate(0, 0) scale(1) rotate(0deg); }
+      100% { transform: translate(35px, -35px) scale(1.12) rotate(20deg); }
+    }
+
+    .app-container {
+      position: relative;
+      z-index: 1;
+      max-width: 1160px;
+      margin: 0 auto;
+      padding: 18px 20px 50px;
+    }
+
+    /* Top School Header */
+    .school-header {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: space-between;
+      align-items: center;
+      gap: 14px;
+      background: linear-gradient(135deg, rgba(31,43,89,0.92), rgba(22,31,66,0.95));
+      border: 2px solid rgba(0, 242, 254, 0.35);
+      border-radius: 22px;
+      padding: 14px 22px;
+      box-shadow: 0 12px 32px rgba(0,0,0,0.45), 0 0 20px rgba(0, 242, 254, 0.15);
+      margin-bottom: 18px;
+    }
+
+    .brand-left {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+    }
+
+    .school-crest {
+      width: 58px;
+      height: 58px;
+      border-radius: 16px;
+      background: linear-gradient(135deg, #00f2fe, #4facfe);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      box-shadow: 0 4px 15px rgba(0, 242, 254, 0.4);
+      flex-shrink: 0;
+    }
+
+    .school-titles h1 {
+      font-family: 'Fredoka', sans-serif;
+      font-size: 1.35rem;
+      color: #ffffff;
+      letter-spacing: 0.4px;
+    }
+
+    .school-titles p {
+      font-size: 0.88rem;
+      color: var(--neon-gold);
+      font-weight: 700;
+    }
+
+    .top-controls {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .hud-pill {
+      background: rgba(11, 16, 38, 0.85);
+      border: 2px solid rgba(255, 213, 79, 0.45);
+      padding: 8px 14px;
+      border-radius: 999px;
+      font-family: 'Fredoka', sans-serif;
+      font-size: 0.95rem;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      color: #fff;
+    }
+
+    .btn-util {
+      cursor: pointer;
+      border: none;
+      border-radius: 14px;
+      padding: 9px 15px;
+      font-family: 'Fredoka', sans-serif;
+      font-size: 0.92rem;
+      font-weight: 600;
+      color: #0b1026;
+      background: linear-gradient(135deg, var(--neon-gold), #ffb300);
+      box-shadow: 0 4px 0 #c68400;
+      transition: transform 0.12s, box-shadow 0.12s;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+    }
+    .btn-util:hover { transform: translateY(-2px); }
+    .btn-util:active { transform: translateY(2px); box-shadow: 0 1px 0 #c68400; }
+
+    .btn-util.cyan {
+      background: linear-gradient(135deg, var(--neon-cyan), #4facfe);
+      box-shadow: 0 4px 0 #0088a3;
+    }
+    .btn-util.pink {
+      background: linear-gradient(135deg, var(--neon-pink), #ff6b9d);
+      color: #fff;
+      box-shadow: 0 4px 0 #ad1457;
+    }
+
+    /* Mode Switcher Banner */
+    .campaign-switcher {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 16px;
+      margin-bottom: 18px;
+    }
+
+    .campaign-card {
+      background: linear-gradient(145deg, rgba(31,43,89,0.9), rgba(18,26,58,0.95));
+      border: 3px solid rgba(255,255,255,0.12);
+      border-radius: 22px;
+      padding: 18px 20px;
+      cursor: pointer;
+      transition: all 0.2s ease;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 14px;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .campaign-card:hover {
+      transform: translateY(-3px);
+      border-color: var(--neon-cyan);
+    }
+
+    .campaign-card.active {
+      border-color: var(--neon-gold);
+      background: linear-gradient(145deg, rgba(46, 29, 99, 0.92), rgba(22, 35, 82, 0.96));
+      box-shadow: 0 0 25px rgba(255, 213, 79, 0.28);
+    }
+
+    .campaign-info h2 {
+      font-family: 'Fredoka', sans-serif;
+      font-size: 1.2rem;
+      margin-bottom: 4px;
+      color: #fff;
+    }
+
+    .campaign-info p {
+      font-size: 0.86rem;
+      color: var(--text-muted);
+    }
+
+    .campaign-badge {
+      background: rgba(0, 242, 254, 0.16);
+      border: 1px solid var(--neon-cyan);
+      color: var(--neon-cyan);
+      font-family: 'Fredoka', sans-serif;
+      padding: 6px 12px;
+      border-radius: 12px;
+      font-size: 0.85rem;
+      white-space: nowrap;
+    }
+
+    /* Level Tabs Navigation */
+    .levels-bar {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin-bottom: 18px;
+    }
+
+    .level-tab {
+      flex: 1 1 145px;
+      background: rgba(22, 31, 66, 0.9);
+      border: 2px solid rgba(255,255,255,0.14);
+      border-radius: 16px;
+      padding: 10px 12px;
+      cursor: pointer;
+      color: var(--text-light);
+      font-family: 'Fredoka', sans-serif;
+      text-align: left;
+      transition: all 0.18s;
+      display: flex;
+      flex-direction: column;
+      gap: 4px;
+    }
+
+    .level-tab:hover {
+      border-color: var(--neon-cyan);
+      transform: translateY(-2px);
+    }
+
+    .level-tab.active {
+      background: linear-gradient(135deg, #ff2e93, #7928ca);
+      border-color: var(--neon-gold);
+      box-shadow: 0 6px 18px rgba(255, 46, 147, 0.35);
+    }
+
+    .level-tab .lvl-top {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      font-size: 0.82rem;
+      color: var(--neon-gold);
+    }
+
+    .level-tab .lvl-name {
+      font-size: 0.98rem;
+      font-weight: 700;
+      color: #fff;
+    }
+
+    /* Team & Rule Bar */
+    .team-bar {
+      background: rgba(14, 21, 48, 0.9);
+      border: 2px dashed rgba(0, 230, 118, 0.45);
+      border-radius: 18px;
+      padding: 10px 18px;
+      margin-bottom: 18px;
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+    }
+
+    .team-inputs {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .team-inputs input {
+      background: rgba(255,255,255,0.08);
+      border: 1px solid rgba(255,255,255,0.25);
+      border-radius: 10px;
+      padding: 6px 12px;
+      color: #fff;
+      font-family: 'Nunito', sans-serif;
+      font-weight: 700;
+      width: 170px;
+    }
+
+    .teamwork-controls {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      font-size: 0.86rem;
+      color: var(--neon-green);
+      font-weight: 700;
+    }
+
+    /* Main Arena Layout */
+    .game-stage {
+      display: grid;
+      grid-template-columns: 1.05fr 1.25fr;
+      gap: 20px;
+      align-items: start;
+    }
+
+    @media (max-width: 900px) {
+      .game-stage {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    /* Left Visual Lab Card */
+    .visual-lab-card {
+      background: linear-gradient(160deg, rgba(31,43,89,0.95), rgba(16,23,52,0.98));
+      border: 2px solid rgba(0, 242, 254, 0.35);
+      border-radius: 24px;
+      padding: 20px;
+      box-shadow: 0 14px 34px rgba(0,0,0,0.45);
+      display: flex;
+      flex-direction: column;
+      gap: 14px;
+    }
+
+    .lab-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      border-bottom: 1px solid rgba(255,255,255,0.12);
+      padding-bottom: 10px;
+    }
+
+    .lab-header h3 {
+      font-family: 'Fredoka', sans-serif;
+      color: var(--neon-cyan);
+      font-size: 1.1rem;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .bloom-tag {
+      background: rgba(179, 136, 255, 0.2);
+      border: 1px solid var(--neon-purple);
+      color: var(--neon-purple);
+      padding: 4px 10px;
+      border-radius: 999px;
+      font-size: 0.78rem;
+      font-weight: 800;
+      text-transform: uppercase;
+    }
+
+    .svg-stage {
+      background: radial-gradient(circle at center, #1b285e 0%, #0d1430 100%);
+      border: 2px solid rgba(255,255,255,0.1);
+      border-radius: 18px;
+      min-height: 260px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      padding: 14px;
+      position: relative;
+      overflow: hidden;
+    }
+
+    /* Data Table & Graph Styling inside SVG Stage */
+    .microscope-table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 0.88rem;
+      background: rgba(11, 16, 38, 0.9);
+      border-radius: 12px;
+      overflow: hidden;
+      border: 1px solid rgba(0, 242, 254, 0.35);
+    }
+
+    .microscope-table th,
+    .microscope-table td {
+      padding: 9px 10px;
+      text-align: center;
+      border-bottom: 1px solid rgba(255,255,255,0.1);
+    }
+
+    .microscope-table th {
+      background: rgba(0, 242, 254, 0.2);
+      color: var(--neon-cyan);
+      font-family: 'Fredoka', sans-serif;
+    }
+
+    .microscope-table td:first-child {
+      text-align: left;
+      font-weight: 700;
+      color: #fff;
+    }
+
+    .chk-yes { color: var(--neon-green); font-weight: 900; font-size: 1.05rem; }
+    .chk-no { color: var(--neon-pink); font-weight: 900; font-size: 1.05rem; }
+
+    .scientist-clue-box {
+      background: rgba(255, 213, 79, 0.1);
+      border-left: 4px solid var(--neon-gold);
+      padding: 10px 14px;
+      border-radius: 10px;
+      font-size: 0.9rem;
+      color: #ffe082;
+    }
+
+    /* Right Question Arena Card */
+    .question-card {
+      background: linear-gradient(160deg, rgba(31,43,89,0.96), rgba(16,23,52,0.99));
+      border: 2px solid rgba(255, 213, 79, 0.4);
+      border-radius: 24px;
+      padding: 22px;
+      box-shadow: 0 14px 34px rgba(0,0,0,0.45);
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+    }
+
+    .q-meta-bar {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .q-number-badge {
+      background: linear-gradient(135deg, var(--neon-gold), #ff9100);
+      color: #0b1026;
+      font-family: 'Fredoka', sans-serif;
+      font-weight: 700;
+      padding: 6px 14px;
+      border-radius: 12px;
+      font-size: 0.95rem;
+    }
+
+    .q-dots {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 6px;
+    }
+
+    .q-dot {
+      width: 28px;
+      height: 28px;
+      border-radius: 8px;
+      border: 2px solid rgba(255,255,255,0.2);
+      background: rgba(255,255,255,0.06);
+      color: #fff;
+      font-family: 'Fredoka', sans-serif;
+      font-size: 0.8rem;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: all 0.15s;
+    }
+
+    .q-dot.current {
+      border-color: var(--neon-cyan);
+      background: rgba(0, 242, 254, 0.25);
+      transform: scale(1.1);
+    }
+
+    .q-dot.solved {
+      background: var(--neon-green);
+      color: #0b1026;
+      border-color: #fff;
+      font-weight: 800;
+    }
+
+    .q-text-box {
+      background: rgba(11, 16, 38, 0.75);
+      border: 1px solid rgba(255,255,255,0.14);
+      border-radius: 18px;
+      padding: 16px 18px;
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      gap: 12px;
+    }
+
+    .q-prompt {
+      font-size: 1.14rem;
+      line-height: 1.45;
+      font-weight: 700;
+      color: #ffffff;
+    }
+
+    .btn-tts {
+      background: rgba(0, 242, 254, 0.18);
+      border: 2px solid var(--neon-cyan);
+      color: var(--neon-cyan);
+      width: 42px;
+      height: 42px;
+      border-radius: 12px;
+      cursor: pointer;
+      flex-shrink: 0;
+      font-size: 1.15rem;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: transform 0.15s;
+    }
+    .btn-tts:hover { transform: scale(1.08); }
+
+    /* Options List */
+    .options-grid {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+
+    .option-btn {
+      background: linear-gradient(135deg, rgba(40, 56, 115, 0.85), rgba(24, 34, 74, 0.92));
+      border: 2px solid rgba(255, 255, 255, 0.18);
+      border-radius: 16px;
+      padding: 13px 16px;
+      color: #fff;
+      font-family: 'Nunito', sans-serif;
+      font-size: 1rem;
+      font-weight: 700;
+      text-align: left;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      transition: all 0.16s ease;
+      box-shadow: 0 5px 0 rgba(8, 12, 30, 0.8);
+    }
+
+    .option-btn:hover:not(:disabled) {
+      border-color: var(--neon-cyan);
+      transform: translateY(-2px);
+      background: linear-gradient(135deg, rgba(52, 74, 148, 0.95), rgba(30, 44, 96, 0.98));
+    }
+
+    .option-letter {
+      width: 36px;
+      height: 36px;
+      border-radius: 10px;
+      background: rgba(0, 242, 254, 0.2);
+      border: 2px solid var(--neon-cyan);
+      color: var(--neon-cyan);
+      font-family: 'Fredoka', sans-serif;
+      font-size: 1.05rem;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+    }
+
+    .option-btn.correct {
+      background: linear-gradient(135deg, #00c853, #009624);
+      border-color: #b9f6ca;
+      color: #041f0c;
+    }
+    .option-btn.correct .option-letter {
+      background: #041f0c;
+      color: var(--neon-green);
+      border-color: #041f0c;
+    }
+
+    .option-btn.wrong {
+      background: linear-gradient(135deg, #ff1744, #b71c1c);
+      border-color: #ffcdd2;
+      animation: shake 0.35s ease;
+    }
+
+    @keyframes shake {
+      0%, 100% { transform: translateX(0); }
+      25% { transform: translateX(-7px); }
+      75% { transform: translateX(7px); }
+    }
+
+    /* Feedback Box */
+    .feedback-banner {
+      display: none;
+      border-radius: 16px;
+      padding: 14px 18px;
+      font-weight: 700;
+      line-height: 1.45;
+      animation: popIn 0.25s ease;
+    }
+
+    @keyframes popIn {
+      from { transform: scale(0.95); opacity: 0; }
+      to { transform: scale(1); opacity: 1; }
+    }
+
+    .feedback-banner.success {
+      display: block;
+      background: rgba(0, 230, 118, 0.16);
+      border: 2px solid var(--neon-green);
+      color: #b9f6ca;
+    }
+
+    .feedback-banner.error {
+      display: block;
+      background: rgba(255, 82, 82, 0.16);
+      border: 2px solid var(--danger);
+      color: #ffcdd2;
+    }
+
+    .nav-footer {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 12px;
+      margin-top: 4px;
+    }
+
+    /* Modals (Answer Key & Certificate) */
+    .modal-backdrop {
+      position: fixed;
+      inset: 0;
+      background: rgba(5, 8, 22, 0.86);
+      backdrop-filter: blur(6px);
+      z-index: 100;
+      display: none;
+      align-items: center;
+      justify-content: center;
+      padding: 20px;
+    }
+
+    .modal-backdrop.open {
+      display: flex;
+    }
+
+    .modal-box {
+      background: linear-gradient(160deg, #1b2654, #0f1636);
+      border: 3px solid var(--neon-gold);
+      border-radius: 26px;
+      max-width: 920px;
+      width: 100%;
+      max-height: 88vh;
+      overflow-y: auto;
+      padding: 24px;
+      box-shadow: 0 20px 60px rgba(0,0,0,0.75);
+    }
+
+    .modal-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 16px;
+      border-bottom: 2px solid rgba(255,255,255,0.12);
+      padding-bottom: 12px;
+    }
+
+    .key-table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 0.88rem;
+      margin-top: 10px;
+    }
+
+    .key-table th, .key-table td {
+      padding: 9px 10px;
+      border-bottom: 1px solid rgba(255,255,255,0.12);
+      text-align: left;
+    }
+
+    .key-table th {
+      background: rgba(255, 213, 79, 0.18);
+      color: var(--neon-gold);
+      font-family: 'Fredoka', sans-serif;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Floating Organelle Background -->
+  <div class="bio-bg">
+    <div class="floating-cell fc-1"></div>
+    <div class="floating-cell fc-2"></div>
+    <div class="floating-cell fc-3"></div>
+    <div class="floating-cell fc-4"></div>
+  </div>
+
+  <div class="app-container">
+    <!-- School Header -->
+    <header class="school-header">
+      <div class="brand-left">
+        <div class="school-crest" title="Al Andalus International Schools">
+          <svg width="38" height="38" viewBox="0 0 64 64">
+            <polygon points="32,4 56,16 56,42 32,60 8,42 8,16" fill="#0b1026" stroke="#ffd54f" stroke-width="4"/>
+            <circle cx="32" cy="32" r="12" fill="none" stroke="#00f2fe" stroke-width="3" stroke-dasharray="5,3"/>
+            <circle cx="32" cy="32" r="5" fill="#ff2e93"/>
+          </svg>
+        </div>
+        <div class="school-titles">
+          <h1>AL ANDALUS INTERNATIONAL SCHOOLS • مدارس الأندلس العالمية</h1>
+          <p>Obhur Branch - Boys Section | Grade 7 Science • Chapter 2: Exploring the World of Cells & Cell Carnival</p>
+        </div>
+      </div>
+
+      <div class="top-controls">
+        <div class="hud-pill" title="Solved Questions">
+          ⭐ <span id="hudSolved">0 / 48</span>
+        </div>
+        <div class="hud-pill" title="Total Score">
+          🏆 <span id="hudScore">0</span> pts
+        </div>
+        <div class="hud-pill" title="Streak">
+          🔥 <span id="hudStreak">0</span>
+        </div>
+        <button class="btn-util cyan" id="btnSoundToggle" onclick="toggleSound()">🔊 SFX: ON</button>
+        <button class="btn-util" onclick="openAnswerKey()">🔑 Teacher Key</button>
+        <button class="btn-util pink" onclick="openCertificate()">🎓 Certificate</button>
+      </div>
+    </header>
+
+    <!-- Switch between the 2 uploaded PDF Worksheets -->
+    <section class="campaign-switcher">
+      <div class="campaign-card active" id="campCardW5" onclick="switchCampaign('W5')">
+        <div class="campaign-info">
+          <h2>🎪 Quest 1: The Great Cell Carnival (W5 Worksheet)</h2>
+          <p>Cell Detective Challenge • 5 Carnival Levels • Data Table 1 & Yeast Growth Graph (18 Qs)</p>
+        </div>
+        <span class="campaign-badge" id="badgeW5">0 / 18 ⭐</span>
+      </div>
+
+      <div class="campaign-card" id="campCardW4" onclick="switchCampaign('W4')">
+        <div class="campaign-info">
+          <h2>🏙️ Quest 2: Cell City & Bloom's Lab (W4 Practice Sheet #1)</h2>
+          <p>All 6 Bloom's Taxonomy Levels: Remembering → Creating • Complete 30-Question Mastery</p>
+        </div>
+        <span class="campaign-badge" id="badgeW4">0 / 30 ⭐</span>
+      </div>
+    </section>
+
+    <!-- Student & Team Tracker Bar (Matches Worksheet Rule) -->
+    <section class="team-bar">
+      <div class="team-inputs">
+        <span>🕵️‍♂️ <strong>Detective Name:</strong></span>
+        <input type="text" id="studentName" placeholder="Enter your name..." />
+        <span>🎪 <strong>Team Name:</strong></span>
+        <input type="text" id="teamName" placeholder="e.g., Mito-Champions" />
+      </div>
+      <div class="teamwork-controls">
+        <span>RULE: Low voice, think & solve! Teamwork Bonus:</span>
+        <button class="btn-util cyan" style="padding:5px 10px; font-size:0.8rem;" onclick="adjustTeamPoints(10)">+10 Teamwork</button>
+        <button class="btn-util pink" style="padding:5px 10px; font-size:0.8rem;" onclick="adjustTeamPoints(-5)">-5 Focus</button>
+      </div>
+    </section>
+
+    <!-- Dynamic Level Navigation Tabs -->
+    <nav class="levels-bar" id="levelsBar"></nav>
+
+    <!-- Main Game Stage -->
+    <main class="game-stage">
+      <!-- Left Column: Interactive Microscope / Graph / Organelle Visualizer -->
+      <section class="visual-lab-card">
+        <div class="lab-header">
+          <h3 id="labTitle">🔬 Interactive Bio-Scanner</h3>
+          <span class="bloom-tag" id="bloomTag">Remembering</span>
+        </div>
+
+        <div class="svg-stage" id="svgStage">
+          <!-- Dynamically populated with SVG diagrams, Data Table 1, or Graph 1 -->
+        </div>
+
+        <div class="scientist-clue-box" id="clueBox">
+          💡 <strong>Detective Clue:</strong> Inspect the visual model above before locking in your answer!
+        </div>
+      </section>
+
+      <!-- Right Column: Question & Choices -->
+      <section class="question-card">
+        <div class="q-meta-bar">
+          <span class="q-number-badge" id="qNumberBadge">Question 1</span>
+          <div class="q-dots" id="qDots"></div>
+        </div>
+
+        <div class="q-text-box">
+          <div class="q-prompt" id="qPrompt">Loading question...</div>
+          <button class="btn-tts" onclick="speakQuestion()" title="Read Question Aloud">🔊</button>
+        </div>
+
+        <div class="options-grid" id="optionsGrid"></div>
+
+        <div class="feedback-banner" id="feedbackBanner"></div>
+
+        <div class="nav-footer">
+          <button class="btn-util cyan" onclick="prevQuestion()">⬅ Previous</button>
+          <span id="levelProgressText" style="font-family:'Fredoka',sans-serif; color:var(--neon-gold);">Level Star Progress</span>
+          <button class="btn-util" onclick="nextQuestion()">Next Question ➡</button>
+        </div>
+      </section>
+    </main>
+  </div>
+
+  <!-- Teacher Answer Key Modal -->
+  <div class="modal-backdrop" id="keyModal">
+    <div class="modal-box">
+      <div class="modal-header">
+        <h2 style="font-family:'Fredoka',sans-serif; color:var(--neon-gold);">🔑 Complete Teacher Answer Key (W5 & W4 Worksheets)</h2>
+        <button class="btn-util pink" onclick="closeAnswerKey()">✖ Close</button>
+      </div>
+      <div id="keyModalBody"></div>
+    </div>
+  </div>
+
+  <!-- Certificate Modal -->
+  <div class="modal-backdrop" id="certModal">
+    <div class="modal-box" style="text-align:center;">
+      <div class="modal-header">
+        <h2 style="font-family:'Fredoka',sans-serif; color:var(--neon-gold);">🎓 Carnival Champion & Master Cell Detective Certificate</h2>
+        <button class="btn-util pink" onclick="closeCertificate()">✖ Close</button>
+      </div>
+      <div style="border:4px double var(--neon-cyan); border-radius:20px; padding:28px; background:rgba(11,16,38,0.85);">
+        <h3 style="color:var(--neon-gold); font-family:'Fredoka',sans-serif; font-size:1.5rem;">AL ANDALUS INTERNATIONAL SCHOOLS</h3>
+        <p style="color:var(--text-muted); margin-bottom:14px;">Obhur Branch - Boys Section • Grade 7 Science Department</p>
+        <p style="font-size:1.05rem;">This official commendation certifies that</p>
+        <h2 id="certNameDisplay" style="font-family:'Fredoka',sans-serif; font-size:2rem; color:var(--neon-cyan); margin:10px 0;">Cell Detective</h2>
+        <p id="certTeamDisplay" style="color:var(--neon-green); font-weight:800; margin-bottom:14px;">Team: Cell Explorers</p>
+        <p style="max-width:600px; margin:0 auto 18px; line-height:1.5;">
+          has investigated <strong>Chapter 2: Exploring the World of Cells & The Great Cell Carnival</strong>, mastering microscope slide analysis, yeast population growth graphs, and Cell City organelle functions!
+        </p>
+        <div style="display:flex; justify-content:center; gap:18px; flex-wrap:wrap; margin-bottom:18px;">
+          <div class="hud-pill">⭐ Solved: <span id="certSolved">0 / 48</span></div>
+          <div class="hud-pill">🏆 Total Score: <span id="certScore">0</span> pts</div>
+        </div>
+        <button class="btn-util" onclick="window.print()">🖨️ Print Certificate</button>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    // =========================================================================
+    // WEB AUDIO API SOUND SYNTHESIZER
+    // =========================================================================
+    let soundEnabled = true;
+    let audioCtx = null;
+
+    function getAudioCtx() {
+      if (!audioCtx) {
+        const AudioContext = window.AudioContext || window.webkitAudioContext;
+        audioCtx = new AudioContext();
+      }
+      if (audioCtx.state === 'suspended') audioCtx.resume();
+      return audioCtx;
+    }
+
+    function playTone(freq, type = 'sine', duration = 0.14, delay = 0, vol = 0.14) {
+      if (!soundEnabled) return;
+      try {
+        const ctx = getAudioCtx();
+        const osc = ctx.createOscillator();
+        const gain = ctx.createGain();
+        osc.type = type;
+        osc.frequency.setValueAtTime(freq, ctx.currentTime + delay);
+        gain.gain.setValueAtTime(vol, ctx.currentTime + delay);
+        gain.gain.exponentialRampToValueAtTime(0.001, ctx.currentTime + delay + duration);
+        osc.connect(gain);
+        gain.connect(ctx.destination);
+        osc.start(ctx.currentTime + delay);
+        osc.stop(ctx.currentTime + delay + duration);
+      } catch (e) {}
+    }
+
+    function sfxClick() { playTone(520, 'triangle', 0.07, 0, 0.1); }
+    function sfxCorrect() {
+      playTone(523.25, 'sine', 0.12, 0, 0.15);
+      playTone(659.25, 'sine', 0.12, 0.09, 0.15);
+      playTone(783.99, 'sine', 0.14, 0.18, 0.15);
+      playTone(1046.5, 'triangle', 0.28, 0.27, 0.18);
+    }
+    function sfxWrong() {
+      playTone(220, 'sawtooth', 0.18, 0, 0.13);
+      playTone(165, 'sawtooth', 0.26, 0.15, 0.13);
+    }
+    function sfxFanfare() {
+      [523, 659, 784, 1046, 784, 1046].forEach((f, idx) => {
+        playTone(f, 'triangle', 0.16, idx * 0.1, 0.16);
+      });
+    }
+
+    function toggleSound() {
+      soundEnabled = !soundEnabled;
+      document.getElementById('btnSoundToggle').textContent = soundEnabled ? '🔊 SFX: ON' : '🔇 SFX: OFF';
+      if (soundEnabled) sfxClick();
+    }
+
+    // =========================================================================
+    // COMPLETE QUESTION DATABASES FOR BOTH WORKSHEETS (48 QUESTIONS TOTAL)
+    // =========================================================================
+    const CAMPAIGNS = {
+      W5: {
+        title: "The Great Cell Carnival (W5)",
+        levels: [
+          {
+            id: "w5_lvl1",
+            name: "Level 1: Ticket Booth",
+            bloom: "Remembering",
+            questions: [
+              {
+                num: 1,
+                q: 'Who observed pore-like structures in a thin slice of cork and introduced the term "cells"?',
+                options: ["Louis Pasteur", "Robert Hooke", "Rudolf Virchow", "Antonie van Leeuwenhoek"],
+                ans: 1,
+                visual: "cork",
+                clue: "Think of the 17th-century scientist who looked at dead oak bark (cork) and saw tiny monk-like rooms.",
+                just: 'Robert Hooke named "cells" after viewing cork.'
+              },
+              {
+                num: 2,
+                q: "Which organelle is the site where energy is extracted from food during oxidative metabolism?",
+                options: ["Golgi complex", "Lysosome", "Mitochondrion", "Ribosome"],
+                ans: 2,
+                visual: "mitochondria",
+                clue: "Look at the bean-shaped organelle with folded inner membranes (cristae) generating ATP energy!",
+                just: "Mitochondria extract energy from food (oxidative metabolism)."
+              },
+              {
+                num: 3,
+                q: 'Which structure is described as the "command centre" of the cell?',
+                options: ["Nucleus", "Plasma membrane", "Peroxisome", "Vacuole"],
+                ans: 0,
+                visual: "nucleus",
+                clue: "It houses the cell's DNA master blueprint inside a double nuclear envelope.",
+                just: "The nucleus is the command centre."
+              },
+              {
+                num: 4,
+                q: "Which organelle is found in plant cells but NOT in animal cells?",
+                options: ["Mitochondrion", "Ribosome", "Chloroplast", "Lysosome"],
+                ans: 2,
+                visual: "chloroplast",
+                clue: "This green organelle captures sunlight to make sugar during photosynthesis.",
+                just: "Chloroplasts occur in plant cells only."
+              },
+              {
+                num: 5,
+                q: "What is the name of the semifluid matrix that contains the nucleus and other organelles?",
+                options: ["Plasma membrane", "Nucleolus", "Cytoskeleton", "Cytoplasm"],
+                ans: 3,
+                visual: "cytoplasm",
+                clue: "It is the jelly-like fluid filling the interior of the cell around the organelles.",
+                just: "Cytoplasm is the semifluid matrix."
+              }
+            ]
+          },
+          {
+            id: "w5_lvl2",
+            name: "Level 2: Cell City Tour",
+            bloom: "Understanding",
+            questions: [
+              {
+                num: 6,
+                q: 'In the "cell city" analogy, the cell membrane is compared to a security guard. Which statement best explains why?',
+                options: [
+                  "It produces energy for the whole city",
+                  "It controls which substances enter and leave the cell",
+                  "It stores the city's blueprint (DNA)",
+                  "It digests waste materials"
+                ],
+                ans: 1,
+                visual: "membrane",
+                clue: "A security guard checks IDs at the gate—letting needed supplies in and keeping harmful things out.",
+                just: "The membrane selectively controls entry and exit."
+              },
+              {
+                num: 7,
+                q: 'Ribosomes are described as the cell\'s "factories". Which statement best explains this comparison?',
+                options: [
+                  "They assemble proteins by following instructions from the DNA",
+                  "They store genetic material inside a double membrane",
+                  "They break food down to release energy",
+                  "They package molecules for export"
+                ],
+                ans: 0,
+                visual: "ribosome",
+                clue: "Factories manufacture products; ribosomes link amino acids together to build proteins.",
+                just: "Ribosomes build proteins from DNA instructions."
+              },
+              {
+                num: 8,
+                q: 'Why are lysosomes described as "recycling centres"?',
+                options: [
+                  "They copy DNA before cell division",
+                  "They trap sunlight to make sugar",
+                  "They break down worn-out cell parts and waste so materials can be reused",
+                  "They transport materials along protein highways"
+                ],
+                ans: 2,
+                visual: "lysosome",
+                clue: "Recycling centres digest old scrap and turn it into reusable building blocks.",
+                just: "Lysosomes break down waste and worn-out parts."
+              },
+              {
+                num: 9,
+                q: "Which statement best summarises the contribution of Pasteur and Virchow to cell biology?",
+                options: [
+                  "Cells can only be seen in cork tissue",
+                  "Only animals are made of cells",
+                  "Cells exist only in humans",
+                  "All organisms are composed of cells, and cells build tissues and organs"
+                ],
+                ans: 3,
+                visual: "scientists",
+                clue: "Their work completed classical Cell Theory: all living things are made of cells, and cells come from pre-existing cells.",
+                just: "All organisms are composed of cells."
+              },
+              {
+                num: 10,
+                q: "Why can a plant cell keep a fixed, rigid shape while an animal cell is more flexible?",
+                options: [
+                  "A plant cell has a rigid cell wall outside its cell membrane",
+                  "An animal cell has no cytoplasm",
+                  "A plant cell has no plasma membrane",
+                  "An animal cell has no nucleus"
+                ],
+                ans: 0,
+                visual: "plantwall",
+                clue: "Look at the sturdy outer cellulose frame surrounding the plant cell.",
+                just: "The rigid cell wall maintains plant cell shape."
+              }
+            ]
+          },
+          {
+            id: "w5_lvl3",
+            name: "Level 3: Microscope Lab",
+            bloom: "Applying",
+            questions: [
+              {
+                num: 11,
+                q: "Use Data Table 1. Which slide shows a plant cell?",
+                options: ["Slide P", "Slide R", "Slide Q", "None of the slides"],
+                ans: 2,
+                visual: "datatable1",
+                clue: "Check Data Table 1 above: Which slide has a Nucleus (✓), a Cell wall (✓), AND Chloroplasts (✓)?",
+                just: "Slide Q has a nucleus, cell wall, and chloroplasts."
+              },
+              {
+                num: 12,
+                q: "Athletes' muscle cells contract repeatedly and need large amounts of energy. Which organelle would you expect to find in especially high numbers in these cells?",
+                options: ["Chloroplasts", "Cell walls", "Lysosomes", "Mitochondria"],
+                ans: 3,
+                visual: "mitochondria",
+                clue: "More muscle contraction = higher ATP energy demand!",
+                just: "High energy demand means more mitochondria."
+              },
+              {
+                num: 13,
+                q: "A gland cell makes a protein and releases it from the cell. Which sequence shows the most likely pathway?",
+                options: [
+                  "Golgi complex → nucleus → lysosome → cell wall",
+                  "Ribosomes on rough ER → Golgi complex → plasma membrane",
+                  "Mitochondrion → lysosome → nucleolus → vacuole",
+                  "Plasma membrane → chloroplast → ribosome → peroxisome"
+                ],
+                ans: 1,
+                visual: "pathway",
+                clue: "Follow the secretory pathway: Synthesis on Rough ER → Packaging in Golgi → Export at Plasma Membrane.",
+                just: "Protein pathway: rough ER → Golgi vesicle → membrane."
+              }
+            ]
+          },
+          {
+            id: "w5_lvl4",
+            name: "Level 4: Data Detective",
+            bloom: "Analysing",
+            questions: [
+              {
+                num: 14,
+                q: "Use Graph 1 (Yeast Culture Growth). During which 12-hour interval did the yeast population increase the most?",
+                options: ["0–12 hours", "12–24 hours", "24–36 hours", "36–48 hours"],
+                ans: 2,
+                visual: "yeastgraph",
+                clue: "Compare the jump in y-values: 0→12h (+3), 12→24h (+9), 24→36h (14 to 30 = +16!), 36→48h (+4).",
+                just: "24–36 h rises from 14 to 30 (+16), the steepest interval."
+              },
+              {
+                num: 15,
+                q: "Use Graph 1. Growth slows between 36 and 48 hours. Which inference is best supported by the yeast investigation?",
+                options: [
+                  "Yeast cells stop being living organisms",
+                  "Nutrients such as sugar are probably becoming limited",
+                  "The microscope lost its magnification",
+                  "Yeast cells lost their nuclei"
+                ],
+                ans: 1,
+                visual: "yeastgraph",
+                clue: "Warm water, sugar, and yeast were mixed in a closed container. After 36 hours of rapid growth, what is running out?",
+                just: "Growth levels off, suggesting limited nutrients (sugar)."
+              }
+            ]
+          },
+          {
+            id: "w5_lvl5",
+            name: "Level 5: Champion's Court",
+            bloom: "Evaluating",
+            questions: [
+              {
+                num: 16,
+                q: 'A student claims, "Mitochondria create energy from nothing." Which critique is most scientifically accurate?',
+                options: [
+                  "Mitochondria create new energy without any input",
+                  "Mitochondria release energy from food during oxidative metabolism",
+                  "Mitochondria are the only organelle that uses energy",
+                  "Mitochondria are found only in plant cells"
+                ],
+                ans: 1,
+                visual: "mitochondria",
+                clue: "Energy cannot be created from nothing—mitochondria extract chemical energy stored in food molecules!",
+                just: "Energy is released from food, not created from nothing."
+              },
+              {
+                num: 17,
+                q: 'A student states, "Plant cells don\'t need mitochondria because they have chloroplasts." Which evaluation is best justified?',
+                options: [
+                  "Chloroplasts release energy from food",
+                  "Plant cells have no organelles other than chloroplasts",
+                  "Chloroplasts make food, while mitochondria release energy from it, so plants need both",
+                  "Chloroplasts are found only in animal cells"
+                ],
+                ans: 2,
+                visual: "chloroplast",
+                clue: "Chloroplasts are solar kitchens (making glucose), while mitochondria are power plants (turning glucose into usable ATP).",
+                just: "Chloroplasts make food; mitochondria release its energy."
+              },
+              {
+                num: 18,
+                q: "One student predicts that a cell without lysosomes would stop copying its DNA. Another predicts that waste and worn-out parts would build up. Which prediction is better justified?",
+                options: [
+                  "The DNA prediction, because lysosomes store the DNA",
+                  "Neither, because lysosomes have no function",
+                  "Both are equally justified",
+                  "The waste prediction, because lysosomes break down waste and worn-out components"
+                ],
+                ans: 3,
+                visual: "lysosome",
+                clue: "What happens to a city if the recycling & sanitation centers shut down?",
+                just: "Lysosomes break down waste; the waste prediction fits."
+              }
+            ]
+          }
+        ]
+      },
+
+      // =====================================================================
+      // QUEST 2: W4 PRACTICE SHEET #1 (30 QUESTIONS ACROSS 6 BLOOM LEVELS)
+      // =====================================================================
+      W4: {
+        title: "Cell City & Bloom's Lab (W4)",
+        levels: [
+          {
+            id: "w4_lvl1",
+            name: "1. Remembering",
+            bloom: "Remembering",
+            questions: [
+              {
+                num: 1,
+                q: 'Who is credited with observing and naming "cells" after viewing thin slices of cork under a microscope?',
+                options: ["Antonie van Leeuwenhoek", "Robert Hooke", "Louis Pasteur", "Rudolf Virchow"],
+                ans: 1,
+                visual: "cork",
+                clue: "He observed cork slices in 1665 and coined the word 'cell'.",
+                just: "Robert Hooke observed cork and named 'cells'."
+              },
+              {
+                num: 2,
+                q: 'Which organelle is described as the "powerhouse" of the cell because it produces energy?',
+                options: ["Nucleus", "Ribosome", "Mitochondria", "Golgi complex"],
+                ans: 2,
+                visual: "mitochondria",
+                clue: "The powerhouse converts energy from food into usable cellular energy.",
+                just: "Mitochondria are the powerhouse of the cell."
+              },
+              {
+                num: 3,
+                q: "Which structure stores the cell's genetic material and acts as the cell's control center?",
+                options: ["Cytoplasm", "Nucleus", "Cell membrane", "Vacuole"],
+                ans: 1,
+                visual: "nucleus",
+                clue: "It holds the DNA blueprint inside the center of eukaryotic cells.",
+                just: "The nucleus stores DNA and acts as the control center."
+              },
+              {
+                num: 4,
+                q: "What is the main function of the cell membrane?",
+                options: ["Builds proteins", "Stores DNA", "Controls what enters and leaves the cell", "Produces energy"],
+                ans: 2,
+                visual: "membrane",
+                clue: "It forms a selective barrier around the outside of the cell.",
+                just: "The cell membrane controls what enters and leaves the cell."
+              },
+              {
+                num: 5,
+                q: 'Which structures act as the cell\'s "factories," building proteins according to DNA instructions?',
+                options: ["Lysosomes", "Ribosomes", "Microtubules", "Mitochondria"],
+                ans: 1,
+                visual: "ribosome",
+                clue: "These tiny protein-building machines can float in cytoplasm or stud the Rough ER.",
+                just: "Ribosomes act as protein factories."
+              }
+            ]
+          },
+          {
+            id: "w4_lvl2",
+            name: "2. Understanding",
+            bloom: "Understanding",
+            questions: [
+              {
+                num: 6,
+                q: 'Why does the passage compare the cell membrane to a "security guard"?',
+                options: [
+                  "Because it produces the cell's energy",
+                  "Because it selectively controls which substances enter and exit the cell",
+                  "Because it stores the cell's DNA",
+                  "Because it builds proteins for the cell"
+                ],
+                ans: 1,
+                visual: "membrane",
+                clue: "Selective permeability works just like a security checkpoint at the city gate.",
+                just: "It selectively controls which substances enter and exit."
+              },
+              {
+                num: 7,
+                q: 'In the "busy city" analogy, why is the nucleus compared to "City Hall"?',
+                options: [
+                  "It produces energy for the whole city",
+                  "It holds the DNA, which contains instructions for running the cell, like a blueprint",
+                  "It transports materials throughout the cell",
+                  "It breaks down waste materials"
+                ],
+                ans: 1,
+                visual: "nucleus",
+                clue: "City Hall keeps the master laws and blueprints for the entire metropolis.",
+                just: "The nucleus holds DNA instructions like City Hall holds blueprints."
+              },
+              {
+                num: 8,
+                q: "Based on the passage, which best explains the relationship between DNA and proteins?",
+                options: [
+                  "DNA and proteins have no connection",
+                  "Proteins store DNA inside the nucleus",
+                  "Ribosomes read instructions from DNA to build proteins",
+                  "DNA breaks down proteins for energy"
+                ],
+                ans: 2,
+                visual: "ribosome",
+                clue: "DNA provides the code; ribosomes use that code to assemble proteins.",
+                just: "Ribosomes read instructions from DNA to build proteins."
+              },
+              {
+                num: 9,
+                q: "How would you best describe the role of lysosomes in a cell?",
+                options: [
+                  "They store water and nutrients",
+                  "They act as recycling centers that break down waste and cellular debris",
+                  "They transport DNA between cells",
+                  "They produce chlorophyll for photosynthesis"
+                ],
+                ans: 1,
+                visual: "lysosome",
+                clue: "Lysosomes contain digestive enzymes to clean up worn-out cell parts.",
+                just: "Lysosomes act as recycling centers breaking down waste."
+              },
+              {
+                num: 10,
+                q: 'Which statement best explains why microtubules are compared to "highways"?',
+                options: [
+                  "They store genetic information",
+                  "They transport materials around the cell",
+                  "They control what enters and exits the cell",
+                  "They produce the cell's energy"
+                ],
+                ans: 1,
+                visual: "highways",
+                clue: "Motor proteins walk along microtubule tracks like delivery trucks on a highway!",
+                just: "Microtubules serve as tracks to transport materials around the cell."
+              }
+            ]
+          },
+          {
+            id: "w4_lvl3",
+            name: "3. Applying",
+            bloom: "Applying",
+            questions: [
+              {
+                num: 11,
+                q: "If a cell's mitochondria stopped functioning, which of the following would most likely occur?",
+                options: [
+                  "The cell would produce excess proteins",
+                  "The cell would lack enough energy to carry out its activities",
+                  "The cell's DNA would be destroyed",
+                  "The cell membrane would stop working"
+                ],
+                ans: 1,
+                visual: "mitochondria",
+                clue: "Without the power plant, the city experiences a power blackout.",
+                just: "Without mitochondria, the cell lacks energy for its activities."
+              },
+              {
+                num: 12,
+                q: "A student examines onion cells and human cheek cells under a microscope. Which structure would be seen in the onion cells but NOT the cheek cells?",
+                options: ["Nucleus", "Cell membrane", "Cell wall", "Cytoplasm"],
+                ans: 2,
+                visual: "plantwall",
+                clue: "Onion is a plant; human cheek is animal. Which rigid outer layer belongs only to plants?",
+                just: "Onion (plant) cells have a rigid cell wall; cheek (animal) cells do not."
+              },
+              {
+                num: 13,
+                q: "In Lab Work 2, if sugar were left out of the yeast culture mixture, what would most likely happen to the yeast's reproduction rate?",
+                options: [
+                  "It would increase significantly",
+                  "It would likely decrease due to lack of an energy source",
+                  "It would remain the same",
+                  "The yeast would die within seconds"
+                ],
+                ans: 1,
+                visual: "yeastgraph",
+                clue: "Sugar is the food fuel yeast cells break down for energy to bud and reproduce.",
+                just: "Without sugar as an energy source, yeast reproduction decreases."
+              },
+              {
+                num: 14,
+                q: "A cell is found to have an unusually large number of ribosomes. This cell is most likely specialized for which activity?",
+                options: [
+                  "Breaking down waste materials",
+                  "Producing large amounts of protein",
+                  "Transporting genetic material out of the cell",
+                  "Absorbing sunlight for energy"
+                ],
+                ans: 1,
+                visual: "ribosome",
+                clue: "More protein factories = more protein production!",
+                just: "High ribosome numbers indicate specialization for protein synthesis."
+              },
+              {
+                num: 15,
+                q: "Using the cell diagram, which organelle would you examine to investigate how a cell breaks down old or damaged components?",
+                options: ["Nucleolus", "Lysosome", "Centrosome", "Golgi complex"],
+                ans: 1,
+                visual: "lysosome",
+                clue: "Which organelle is the recycling and waste-disposal center?",
+                just: "Lysosomes break down old or damaged cell components."
+              }
+            ]
+          },
+          {
+            id: "w4_lvl4",
+            name: "4. Analyzing",
+            bloom: "Analyzing",
+            questions: [
+              {
+                num: 16,
+                q: "Which comparison best explains the different roles of ribosomes and mitochondria in a cell?",
+                options: [
+                  "Both organelles perform the identical function of storing DNA",
+                  "Ribosomes build proteins while mitochondria generate the energy needed for cellular activities",
+                  "Ribosomes produce energy while mitochondria build proteins",
+                  "Neither organelle contributes to cell survival"
+                ],
+                ans: 1,
+                visual: "pathway",
+                clue: "Contrast the Factory (Ribosome) with the Powerhouse (Mitochondrion).",
+                just: "Ribosomes build proteins; mitochondria generate cellular energy."
+              },
+              {
+                num: 17,
+                q: "The cell diagram shows a chloroplast, vacuole, and cell wall. What can you infer about the type of cell shown?",
+                options: ["It is a bacterial cell", "It is a plant cell", "It is a human cheek cell", "It is a virus"],
+                ans: 1,
+                visual: "chloroplast",
+                clue: "Chloroplasts + large central vacuole + cell wall are the classic trio of plant cells.",
+                just: "Chloroplasts, large vacuoles, and cell walls identify a plant cell."
+              },
+              {
+                num: 18,
+                q: "Examining the historical sequence (Hooke → Leeuwenhoek → Pasteur and Virchow), what pattern do these discoveries demonstrate?",
+                options: [
+                  "Cell theory was invented all at once, with no incremental changes",
+                  "Understanding of cells built up gradually as tools and observations improved",
+                  "Pasteur discovered cells before microscopes existed",
+                  "There is no connection between the four scientists' work"
+                ],
+                ans: 1,
+                visual: "scientists",
+                clue: "Science advances step-by-step as better lenses and experiments build on earlier discoveries.",
+                just: "Cell knowledge accumulated gradually as microscopes and observations improved."
+              },
+              {
+                num: 19,
+                q: "What does the shift from early microscopes to modern super-resolution fluorescence microscopy reveal about scientific progress in cell biology?",
+                options: [
+                  "Modern tools allow scientists to study molecular interactions inside cells with much greater detail",
+                  "Modern microscopes are used only to look at things larger than cells",
+                  "Early microscopes could already reveal molecular-level detail",
+                  "There has been no real advancement in microscope technology"
+                ],
+                ans: 0,
+                visual: "scientists",
+                clue: "Super-resolution fluorescence lets researchers watch glowing molecules interact inside living cells!",
+                just: "Modern microscopy reveals fine molecular interactions inside cells."
+              },
+              {
+                num: 20,
+                q: 'Which of the following best explains why proteins are described as doing "most of the heavy lifting" in a cell?',
+                options: [
+                  "Proteins are the only molecules found in cells",
+                  "Proteins carry out most of the functional tasks that keep the cell working",
+                  "Proteins are responsible only for storing genetic information",
+                  "Proteins have no real function within a cell"
+                ],
+                ans: 1,
+                visual: "ribosome",
+                clue: "Enzymes, structural fibers, transport channels, and motors are all proteins doing vital cell work.",
+                just: "Proteins perform most of the functional tasks that keep cells alive."
+              }
+            ]
+          },
+          {
+            id: "w4_lvl5",
+            name: "5. Evaluating",
+            bloom: "Evaluating",
+            questions: [
+              {
+                num: 21,
+                q: 'Which argument best supports using the "busy city" analogy to teach cell structure to students?',
+                options: [
+                  "It replaces the need to learn organelle names entirely",
+                  "It helps students relate an abstract, invisible structure to a familiar, understandable system",
+                  "It proves that cells are literally cities",
+                  "It has no educational value"
+                ],
+                ans: 1,
+                visual: "nucleus",
+                clue: "Good scientific analogies connect microscopic, unseen worlds to everyday life experiences.",
+                just: "Analogies help relate abstract microscopic structures to familiar systems."
+              },
+              {
+                num: 22,
+                q: 'A student claims: "The nucleus is the most important organelle because it stores the DNA." Which is the strongest counterargument based on the passage?',
+                options: [
+                  "Without functioning mitochondria providing energy, or ribosomes building proteins, the DNA's instructions could not be carried out",
+                  "The nucleus has no real function in the cell",
+                  "DNA is not actually stored in the nucleus",
+                  "Mitochondria are more numerous, so they must be more important"
+                ],
+                ans: 0,
+                visual: "pathway",
+                clue: "A blueprint in City Hall is useless if there is no electricity (mitochondria) or workers/factories (ribosomes)!",
+                just: "Organelles depend on each other; DNA instructions require energy and ribosomes."
+              },
+              {
+                num: 23,
+                q: "Which criterion best justifies choosing onion cells for the microscope lab described in the passage?",
+                options: [
+                  "Onion cells are easy to obtain and their thin, transparent layers clearly reveal cell walls and nuclei under a microscope",
+                  "Onion cells contain no visible structures at all",
+                  "Onion cells are identical to animal cells in every way",
+                  "Onion cells cannot be viewed with a compound microscope"
+                ],
+                ans: 0,
+                visual: "plantwall",
+                clue: "Onion epidermis peels off in a single transparent sheet that light passes through easily.",
+                just: "Onion skin is thin, transparent, and clearly shows cell walls and nuclei."
+              },
+              {
+                num: 24,
+                q: "Based on the passage, which statement best evaluates the significance of Hooke's and van Leeuwenhoek's contributions to biology?",
+                options: [
+                  "They had no lasting significance since more powerful microscopes were later invented",
+                  "Their observations first opened the microscopic world to scientific study, laying groundwork for modern cell biology",
+                  "They discovered mitochondria and ribosomes",
+                  "Their work was disproven by Louis Pasteur"
+                ],
+                ans: 1,
+                visual: "cork",
+                clue: "Pioneers open the door so future generations of scientists can walk through.",
+                just: "They opened the microscopic world to science and laid the foundation for cell biology."
+              },
+              {
+                num: 25,
+                q: "Which statement best evaluates the reliability of using the yeast culture lab to study reproduction rates?",
+                options: [
+                  "Counting yeast cell numbers over time provides measurable, comparable data on reproduction, making it a reasonably reliable method",
+                  "Yeast cells cannot reproduce, so the lab has no value",
+                  "The 48-hour observation period makes the results completely unreliable",
+                  "There is no way to observe yeast reproduction microscopically"
+                ],
+                ans: 0,
+                visual: "yeastgraph",
+                clue: "Quantitative cell counts at regular intervals (0, 12, 24, 36, 48h) produce objective, graphable evidence.",
+                just: "Counting cells over time gives measurable, comparable data on reproduction."
+              }
+            ]
+          },
+          {
+            id: "w4_lvl6",
+            name: "6. Creating",
+            bloom: "Creating",
+            questions: [
+              {
+                num: 26,
+                q: 'Which of the following would be the most original and effective new analogy (other than "city") to represent cell organelles working together?',
+                options: [
+                  "A factory or orchestra, where each organelle takes on a role like a machine or musician contributing to a shared final product",
+                  "Simply repeating that the nucleus is 'City Hall' again",
+                  "Describing each organelle as unrelated and disconnected",
+                  "Comparing the cell only to a single wall with nothing inside"
+                ],
+                ans: 0,
+                visual: "pathway",
+                clue: "Think of a system with a conductor/director and specialized sections working in harmony.",
+                just: "An orchestra or factory effectively models specialized parts collaborating."
+              },
+              {
+                num: 27,
+                q: "If designing an experiment to model how the cell membrane selectively controls entry and exit of substances, which setup would best represent this function?",
+                options: [
+                  "A sealed box that lets nothing in or out at all",
+                  "A semi-permeable barrier (e.g., a coffee filter or dialysis bag) that allows small particles through while blocking larger ones",
+                  "An open container with no barrier at all",
+                  "A solid metal box with no openings"
+                ],
+                ans: 1,
+                visual: "membrane",
+                clue: "Selective permeability means letting small molecules pass while blocking larger ones.",
+                just: "A semi-permeable filter or dialysis bag models selective permeability."
+              },
+              {
+                num: 28,
+                q: "You are designing a poster showing how the nucleus, ribosomes, and mitochondria work together to produce a needed protein. Which sequence correctly represents this process?",
+                options: [
+                  "Mitochondria store DNA → ribosomes provide energy → nucleus builds protein",
+                  "Nucleus stores DNA instructions → ribosomes use the instructions to build proteins → mitochondria supply the energy for this process",
+                  "Ribosomes store DNA → nucleus builds protein → mitochondria do nothing",
+                  "There is no connection between these three organelles"
+                ],
+                ans: 1,
+                visual: "pathway",
+                clue: "Match each organelle to its true role: Blueprint (Nucleus) + Builder (Ribosome) + Power (Mitochondria).",
+                just: "Nucleus stores DNA → ribosomes build proteins → mitochondria supply energy."
+              },
+              {
+                num: 29,
+                q: 'If proposing a new lab investigation to extend "Lab Work 2" (yeast cultures), which variable would create the most scientifically valid follow-up experiment?',
+                options: [
+                  "Testing how different temperatures affect yeast reproduction rate over 48 hours",
+                  "Repeating the same experiment with no changes",
+                  "Removing all yeast from the experiment",
+                  "Using a container with no water"
+                ],
+                ans: 0,
+                visual: "yeastgraph",
+                clue: "A valid follow-up tests one independent variable (like temperature) while measuring growth over 48 hours.",
+                just: "Testing different temperatures over 48 hours is a valid controlled extension."
+              },
+              {
+                num: 30,
+                q: 'Which of the following would best fulfill the task of creating an original short narrative that accurately reflects a mitochondrion\'s role within the "cell city"?',
+                options: [
+                  "A story describing the mitochondrion as the city's power plant, breaking down food to generate the energy that fuels every other organelle's work",
+                  "A story describing the mitochondrion as the city's security guard controlling entry and exit",
+                  "A story describing the mitochondrion as storing all genetic information",
+                  "A story where the mitochondrion has no role in the cell at all"
+                ],
+                ans: 0,
+                visual: "mitochondria",
+                clue: "Keep the story scientifically accurate: Mitochondrion = City Power Plant!",
+                just: "Describing the mitochondrion as the city's power plant accurately reflects its role."
+              }
+            ]
+          }
+        ]
+      }
+    };
+
+    // =========================================================================
+    // STATE MANAGEMENT
+    // =========================================================================
+    let currentCampaign = 'W5';
+    let currentLevelIdx = 0;
+    let currentQuestionIdx = 0;
+    let totalScore = 0;
+    let streak = 0;
+    const solvedMap = {}; // key: "W5_1" -> true
+
+    // =========================================================================
+    // VISUAL LAB SVG & DATA RENDERERS
+    // =========================================================================
+    function getVisualHTML(type) {
+      switch (type) {
+        case "datatable1":
+          return `
+            <div style="width:100%;">
+              <div style="font-family:'Fredoka',sans-serif; color:var(--neon-gold); margin-bottom:8px; text-align:center;">
+                📋 Data Table 1: Microscope Observations of Three Prepared Slides (✓ = observed, ✗ = not observed)
+              </div>
+              <table class="microscope-table">
+                <thead>
+                  <tr>
+                    <th>Feature</th>
+                    <th>Slide P</th>
+                    <th>Slide Q</th>
+                    <th>Slide R</th>
+                    <th>Notes</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td>Nucleus with nuclear envelope</td>
+                    <td class="chk-yes">✓</td>
+                    <td class="chk-yes">✓</td>
+                    <td class="chk-no">✗</td>
+                    <td style="font-size:0.8rem; color:var(--neon-gold);">Slide R has a nucleoid instead</td>
+                  </tr>
+                  <tr>
+                    <td>Cell wall</td>
+                    <td class="chk-no">✗</td>
+                    <td class="chk-yes">✓</td>
+                    <td class="chk-yes">✓</td>
+                    <td>—</td>
+                  </tr>
+                  <tr>
+                    <td>Chloroplasts</td>
+                    <td class="chk-no">✗</td>
+                    <td class="chk-yes">✓</td>
+                    <td class="chk-no">✗</td>
+                    <td>—</td>
+                  </tr>
+                  <tr>
+                    <td>Mitochondria</td>
+                    <td class="chk-yes">✓</td>
+                    <td class="chk-yes">✓</td>
+                    <td class="chk-no">✗</td>
+                    <td>—</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          `;
+
+        case "yeastgraph":
+          return `
+            <div style="width:100%; text-align:center;">
+              <div style="font-family:'Fredoka',sans-serif; color:var(--neon-gold); margin-bottom:6px;">
+                📈 Graph 1: Yeast Culture Growth (Warm water + Sugar + Yeast over 48h)
+              </div>
+              <svg viewBox="0 0 420 220" width="100%" style="max-width:420px; background:#090d22; border-radius:12px; border:1px solid rgba(0,242,254,0.3);">
+                <!-- Grid lines -->
+                <line x1="55" y1="25" x2="390" y2="25" stroke="rgba(255,255,255,0.12)" />
+                <line x1="55" y1="65" x2="390" y2="65" stroke="rgba(255,255,255,0.12)" />
+                <line x1="55" y1="105" x2="390" y2="105" stroke="rgba(255,255,255,0.12)" />
+                <line x1="55" y1="145" x2="390" y2="145" stroke="rgba(255,255,255,0.12)" />
+                <line x1="55" y1="185" x2="390" y2="185" stroke="#ffffff" stroke-width="2" />
+                <line x1="55" y1="25" x2="55" y2="185" stroke="#ffffff" stroke-width="2" />
+
+                <!-- Y-axis labels (0 to 40) -->
+                <text x="45" y="189" fill="#b0c4de" font-size="11" text-anchor="end">0</text>
+                <text x="45" y="149" fill="#b0c4de" font-size="11" text-anchor="end">10</text>
+                <text x="45" y="109" fill="#b0c4de" font-size="11" text-anchor="end">20</text>
+                <text x="45" y="69" fill="#b0c4de" font-size="11" text-anchor="end">30</text>
+                <text x="45" y="29" fill="#b0c4de" font-size="11" text-anchor="end">40</text>
+                <text x="16" y="110" fill="#00f2fe" font-size="10" text-anchor="middle" transform="rotate(-90 16,110)">Yeast (x10,000/mL)</text>
+
+                <!-- X-axis labels (0, 12, 24, 36, 48) -->
+                <text x="55" y="202" fill="#b0c4de" font-size="11" text-anchor="middle">0</text>
+                <text x="138" y="202" fill="#b0c4de" font-size="11" text-anchor="middle">12</text>
+                <text x="222" y="202" fill="#b0c4de" font-size="11" text-anchor="middle">24</text>
+                <text x="305" y="202" fill="#b0c4de" font-size="11" text-anchor="middle">36</text>
+                <text x="388" y="202" fill="#b0c4de" font-size="11" text-anchor="middle">48</text>
+                <text x="222" y="216" fill="#ffd54f" font-size="11" text-anchor="middle">Time (hours)</text>
+
+                <!-- Steepest interval highlight (24-36h) -->
+                <rect x="222" y="25" width="83" height="160" fill="rgba(0, 230, 118, 0.08)" />
+
+                <!-- Plotted Line: (0,2)->y=177, (12,5)->y=165, (24,14)->y=129, (36,30)->y=65, (48,34)->y=49 -->
+                <polyline points="55,177 138,165 222,129 305,65 388,49" fill="none" stroke="#00f2fe" stroke-width="3.5" />
+
+                <!-- Data Points -->
+                <circle cx="55" cy="177" r="5" fill="#ffd54f" />
+                <text x="65" y="172" fill="#fff" font-size="10">2</text>
+
+                <circle cx="138" cy="165" r="5" fill="#ffd54f" />
+                <text x="138" y="155" fill="#fff" font-size="10" text-anchor="middle">5</text>
+
+                <circle cx="222" cy="129" r="5" fill="#ffd54f" />
+                <text x="215" y="120" fill="#fff" font-size="10" text-anchor="end">14</text>
+
+                <circle cx="305" cy="65" r="6" fill="#00e676" />
+                <text x="300" y="55" fill="#00e676" font-weight="bold" font-size="11" text-anchor="end">30 (+16!)</text>
+
+                <circle cx="388" cy="49" r="5" fill="#ff2e93" />
+                <text x="378" y="42" fill="#ff94c2" font-size="10" text-anchor="end">34</text>
+              </svg>
+            </div>
+          `;
+
+        case "cork":
+          return `
+            <svg viewBox="0 0 320 200" width="100%" style="max-width:320px;">
+              <circle cx="105" cy="100" r="72" fill="#2a1b12" stroke="#ffd54f" stroke-width="4"/>
+              <!-- Cork Honeycomb Pore Cells -->
+              <g stroke="#d7a86e" stroke-width="2.5" fill="#4e342e">
+                <rect x="65" y="55" width="24" height="18" rx="3"/>
+                <rect x="93" y="55" width="24" height="18" rx="3"/>
+                <rect x="121" y="55" width="24" height="18" rx="3"/>
+                <rect x="55" y="77" width="24" height="18" rx="3"/>
+                <rect x="83" y="77" width="24" height="18" rx="3"/>
+                <rect x="111" y="77" width="24" height="18" rx="3"/>
+                <rect x="65" y="99" width="24" height="18" rx="3"/>
+                <rect x="93" y="99" width="24" height="18" rx="3"/>
+                <rect x="121" y="99" width="24" height="18" rx="3"/>
+                <rect x="75" y="121" width="24" height="18" rx="3"/>
+                <rect x="103" y="121" width="24" height="18" rx="3"/>
+              </g>
+              <text x="245" y="80" fill="#ffd54f" font-family="Fredoka" font-size="15" text-anchor="middle">1665 Cork Slice</text>
+              <text x="245" y="105" fill="#00f2fe" font-size="12" text-anchor="middle">Pore-like boxes</text>
+              <text x="245" y="125" fill="#ffffff" font-size="12" text-anchor="middle">named "Cells"</text>
+            </svg>
+          `;
+
+        case "mitochondria":
+          return `
+            <svg viewBox="0 0 320 200" width="100%" style="max-width:320px;">
+              <ellipse cx="160" cy="100" rx="110" ry="62" fill="#b71c1c" stroke="#ff9100" stroke-width="5"/>
+              <path d="M 75,100 Q 95,60 110,100 T 145,100 T 180,100 T 215,100 T 245,100" fill="none" stroke="#ffd54f" stroke-width="5" stroke-linecap="round"/>
+              <circle cx="115" cy="85" r="12" fill="#00e676"/>
+              <text x="115" y="89" fill="#000" font-size="9" font-weight="bold" text-anchor="middle">ATP</text>
+              <circle cx="195" cy="115" r="12" fill="#00e676"/>
+              <text x="195" y="119" fill="#000" font-size="9" font-weight="bold" text-anchor="middle">ATP</text>
+              <text x="160" y="25" fill="#ffd54f" font-family="Fredoka" font-size="15" text-anchor="middle">⚡ Mitochondrion: Cell Powerhouse</text>
+              <text x="160" y="185" fill="#00f2fe" font-size="12" text-anchor="middle">Extracts energy from food (Oxidative Metabolism)</text>
+            </svg>
+          `;
+
+        case "nucleus":
+          return `
+            <svg viewBox="0 0 320 200" width="100%" style="max-width:320px;">
+              <circle cx="160" cy="100" r="68" fill="#311b92" stroke="#b388ff" stroke-width="4" stroke-dasharray="12,5"/>
+              <circle cx="160" cy="100" r="26" fill="#ff2e93"/>
+              <!-- DNA double helix squiggle -->
+              <path d="M 115,80 Q 135,65 155,80 T 195,80" fill="none" stroke="#00f2fe" stroke-width="3"/>
+              <path d="M 115,125 Q 135,140 155,125 T 195,125" fill="none" stroke="#ffd54f" stroke-width="3"/>
+              <text x="160" y="22" fill="#ffd54f" font-family="Fredoka" font-size="15" text-anchor="middle">🏛️ Nucleus: Command Centre / City Hall</text>
+              <text x="160" y="188" fill="#00f2fe" font-size="12" text-anchor="middle">Stores DNA Master Blueprints inside Nuclear Envelope</text>
+            </svg>
+          `;
+
+        case "chloroplast":
+          return `
+            <svg viewBox="0 0 320 200" width="100%" style="max-width:320px;">
+              <ellipse cx="160" cy="105" rx="108" ry="58" fill="#1b5e20" stroke="#00e676" stroke-width="5"/>
+              <!-- Grana stacks -->
+              <g fill="#00e676" stroke="#041f0c" stroke-width="1.5">
+                <rect x="95" y="75" width="32" height="12" rx="5"/>
+                <rect x="95" y="89" width="32" height="12" rx="5"/>
+                <rect x="95" y="103" width="32" height="12" rx="5"/>
+                <rect x="145" y="80" width="32" height="12" rx="5"/>
+                <rect x="145" y="94" width="32" height="12" rx="5"/>
+                <rect x="145" y="108" width="32" height="12" rx="5"/>
+                <rect x="195" y="75" width="32" height="12" rx="5"/>
+                <rect x="195" y="89" width="32" height="12" rx="5"/>
+                <rect x="195" y="103" width="32" height="12" rx="5"/>
+              </g>
+              <text x="160" y="26" fill="#00e676" font-family="Fredoka" font-size="15" text-anchor="middle">☀️ Chloroplast (Plant Cells Only)</text>
+              <text x="160" y="186" fill="#ffd54f" font-size="12" text-anchor="middle">Captures sunlight to make food (sugar)</text>
+            </svg>
+          `;
+
+        case "membrane":
+          return `
+            <svg viewBox="0 0 320 200" width="100%" style="max-width:320px;">
+              <rect x="30" y="75" width="260" height="50" rx="10" fill="rgba(0,242,254,0.18)" stroke="#00f2fe" stroke-width="3"/>
+              <!-- Channel gate -->
+              <rect x="140" y="65" width="40" height="70" rx="8" fill="#ffd54f" stroke="#0b1026" stroke-width="3"/>
+              <text x="160" y="105" fill="#0b1026" font-family="Fredoka" font-size="11" text-anchor="middle">GATE</text>
+              <!-- Nutrients entering -->
+              <circle cx="80" cy="45" r="8" fill="#00e676"/>
+              <text x="80" y="30" fill="#00e676" font-size="11" text-anchor="middle">Nutrients IN ↓</text>
+              <!-- Waste blocked/exiting -->
+              <circle cx="240" cy="45" r="8" fill="#ff2e93"/>
+              <text x="240" y="30" fill="#ff2e93" font-size="11" text-anchor="middle">Selective Guard 🛡️</text>
+              <text x="160" y="182" fill="#ffffff" font-size="12" text-anchor="middle">Plasma Membrane: Controls entry & exit</text>
+            </svg>
+          `;
+
+        case "ribosome":
+          return `
+            <svg viewBox="0 0 320 200" width="100%" style="max-width:320px;">
+              <ellipse cx="160" cy="115" rx="65" ry="32" fill="#7c4dff" stroke="#fff" stroke-width="2"/>
+              <ellipse cx="160" cy="82" rx="48" ry="22" fill="#b388ff" stroke="#fff" stroke-width="2"/>
+              <!-- mRNA strand -->
+              <line x1="40" y1="98" x2="280" y2="98" stroke="#ffd54f" stroke-width="4" stroke-dasharray="8,4"/>
+              <!-- Growing protein chain -->
+              <circle cx="160" cy="52" r="7" fill="#00e676"/>
+              <circle cx="172" cy="40" r="7" fill="#00f2fe"/>
+              <circle cx="186" cy="30" r="7" fill="#ff2e93"/>
+              <text x="160" y="175" fill="#ffd54f" font-family="Fredoka" font-size="14" text-anchor="middle">🏭 Ribosome: Protein Factory</text>
+              <text x="160" y="193" fill="#00f2fe" font-size="11" text-anchor="middle">Reads DNA instructions to assemble proteins</text>
+            </svg>
+          `;
+
+        case "lysosome":
+          return `
+            <svg viewBox="0 0 320 200" width="100%" style="max-width:320px;">
+              <circle cx="160" cy="100" r="62" fill="#4a148c" stroke="#ff2e93" stroke-width="5"/>
+              <circle cx="140" cy="85" r="10" fill="#00e676"/>
+              <circle cx="180" cy="90" r="8" fill="#ffd54f"/>
+              <circle cx="155" cy="120" r="11" fill="#00f2fe"/>
+              <text x="160" y="25" fill="#00e676" font-family="Fredoka" font-size="15" text-anchor="middle">♻️ Lysosome: Recycling Centre</text>
+              <text x="160" y="185" fill="#ffffff" font-size="12" text-anchor="middle">Breaks down waste & worn-out cell parts</text>
+            </svg>
+          `;
+
+        case "plantwall":
+          return `
+            <svg viewBox="0 0 320 200" width="100%" style="max-width:320px;">
+              <polygon points="80,35 240,35 270,100 240,165 80,165 50,100" fill="#1b5e20" stroke="#00e676" stroke-width="7"/>
+              <polygon points="92,47 228,47 254,100 228,153 92,153 66,100" fill="#2e7d32" stroke="#ffd54f" stroke-width="2" stroke-dasharray="5,3"/>
+              <ellipse cx="145" cy="100" rx="45" ry="28" fill="rgba(0,242,254,0.35)" stroke="#00f2fe" stroke-width="2"/>
+              <circle cx="215" cy="100" r="18" fill="#ab47bc"/>
+              <text x="160" y="22" fill="#00e676" font-family="Fredoka" font-size="14" text-anchor="middle">🧱 Rigid Outer Plant Cell Wall</text>
+              <text x="160" y="190" fill="#ffd54f" font-size="12" text-anchor="middle">Keeps plant & onion cells in a fixed rectangular/polygonal shape</text>
+            </svg>
+          `;
+
+        case "pathway":
+          return `
+            <svg viewBox="0 0 350 200" width="100%" style="max-width:350px;">
+              <rect x="18" y="65" width="85" height="65" rx="12" fill="#311b92" stroke="#b388ff" stroke-width="3"/>
+              <text x="60" y="95" fill="#fff" font-family="Fredoka" font-size="12" text-anchor="middle">1. Rough ER</text>
+              <text x="60" y="112" fill="#ffd54f" font-size="10" text-anchor="middle">& Ribosomes</text>
+
+              <text x="118" y="102" fill="#00f2fe" font-size="20" font-weight="bold">➔</text>
+
+              <rect x="138" y="65" width="85" height="65" rx="12" fill="#004d40" stroke="#00e676" stroke-width="3"/>
+              <text x="180" y="95" fill="#fff" font-family="Fredoka" font-size="12" text-anchor="middle">2. Golgi</text>
+              <text x="180" y="112" fill="#00e676" font-size="10" text-anchor="middle">Complex</text>
+
+              <text x="236" y="102" fill="#00f2fe" font-size="20" font-weight="bold">➔</text>
+
+              <rect x="255" y="65" width="80" height="65" rx="12" fill="#880e4f" stroke="#ff2e93" stroke-width="3"/>
+              <text x="295" y="95" fill="#fff" font-family="Fredoka" font-size="12" text-anchor="middle">3. Plasma</text>
+              <text x="295" y="112" fill="#ffd54f" font-size="10" text-anchor="middle">Membrane</text>
+
+              <text x="175" y="30" fill="#ffd54f" font-family="Fredoka" font-size="14" text-anchor="middle">📦 Protein Export Pathway</text>
+              <text x="175" y="175" fill="#00f2fe" font-size="12" text-anchor="middle">Powered by Mitochondria ATP Energy ⚡</text>
+            </svg>
+          `;
+
+        default:
+          return `
+            <svg viewBox="0 0 320 200" width="100%" style="max-width:320px;">
+              <ellipse cx="160" cy="100" rx="115" ry="68" fill="rgba(0, 242, 254, 0.14)" stroke="#00f2fe" stroke-width="4"/>
+              <line x1="65" y1="85" x2="255" y2="115" stroke="#ffd54f" stroke-width="3" stroke-dasharray="6,4"/>
+              <line x1="75" y1="125" x2="245" y2="75" stroke="#00e676" stroke-width="3" stroke-dasharray="6,4"/>
+              <circle cx="160" cy="100" r="24" fill="#7c4dff" stroke="#fff" stroke-width="2"/>
+              <circle cx="105" cy="80" r="10" fill="#ff2e93"/>
+              <circle cx="215" cy="120" r="12" fill="#00e676"/>
+              <text x="160" y="22" fill="#ffd54f" font-family="Fredoka" font-size="14" text-anchor="middle">🔬 Exploring the World of Cells</text>
+              <text x="160" y="188" fill="#00f2fe" font-size="12" text-anchor="middle">Cytoplasm Matrix, Microtubule Highways & Cell Theory</text>
+            </svg>
+          `;
+      }
+    }
+
+    // =========================================================================
+    // UI RENDERING LOGIC
+    // =========================================================================
+    function switchCampaign(campKey) {
+      sfxClick();
+      currentCampaign = campKey;
+      currentLevelIdx = 0;
+      currentQuestionIdx = 0;
+      document.getElementById('campCardW5').classList.toggle('active', campKey === 'W5');
+      document.getElementById('campCardW4').classList.toggle('active', campKey === 'W4');
+      renderLevelsBar();
+      renderCurrentQuestion();
+    }
+
+    function renderLevelsBar() {
+      const bar = document.getElementById('levelsBar');
+      const levels = CAMPAIGNS[currentCampaign].levels;
+      bar.innerHTML = levels.map((lvl, idx) => {
+        const solvedInLvl = lvl.questions.filter(q => solvedMap[`${currentCampaign}_${q.num}`]).length;
+        return `
+          <button class="level-tab ${idx === currentLevelIdx ? 'active' : ''}" onclick="selectLevel(${idx})">
+            <div class="lvl-top">
+              <span>${lvl.bloom}</span>
+              <span>⭐ ${solvedInLvl}/${lvl.questions.length}</span>
+            </div>
+            <div class="lvl-name">${lvl.name}</div>
+          </button>
+        `;
+      }).join('');
+    }
+
+    function selectLevel(lvlIdx) {
+      sfxClick();
+      currentLevelIdx = lvlIdx;
+      currentQuestionIdx = 0;
+      renderLevelsBar();
+      renderCurrentQuestion();
+    }
+
+    function selectQuestion(qIdx) {
+      sfxClick();
+      currentQuestionIdx = qIdx;
+      renderCurrentQuestion();
+    }
+
+    function renderCurrentQuestion() {
+      const camp = CAMPAIGNS[currentCampaign];
+      const level = camp.levels[currentLevelIdx];
+      const qObj = level.questions[currentQuestionIdx];
+      const qKey = `${currentCampaign}_${qObj.num}`;
+      const isSolved = !!solvedMap[qKey];
+
+      // Update Left Visual Lab
+      document.getElementById('labTitle').textContent = `🔬 ${level.name}`;
+      document.getElementById('bloomTag').textContent = level.bloom;
+      document.getElementById('svgStage').innerHTML = getVisualHTML(qObj.visual);
+      document.getElementById('clueBox').innerHTML = `💡 <strong>Detective Clue:</strong> ${qObj.clue}`;
+
+      // Update Question Meta & Dots
+      document.getElementById('qNumberBadge').textContent = `${currentCampaign} • Question ${qObj.num}`;
+      const dotsContainer = document.getElementById('qDots');
+      dotsContainer.innerHTML = level.questions.map((item, idx) => {
+        const solvedClass = solvedMap[`${currentCampaign}_${item.num}`] ? 'solved' : '';
+        const currClass = idx === currentQuestionIdx ? 'current' : '';
+        return `<button class="q-dot ${solvedClass} ${currClass}" onclick="selectQuestion(${idx})">${item.num}</button>`;
+      }).join('');
+
+      // Update Prompt
+      document.getElementById('qPrompt').textContent = `${qObj.num}. ${qObj.q}`;
+
+      // Update Options
+      const letters = ['A', 'B', 'C', 'D'];
+      const optionsGrid = document.getElementById('optionsGrid');
+      optionsGrid.innerHTML = qObj.options.map((optText, idx) => {
+        let extraClass = '';
+        if (isSolved && idx === qObj.ans) extraClass = 'correct';
+        return `
+          <button class="option-btn ${extraClass}" ${isSolved ? 'disabled' : ''} onclick="checkAnswer(${idx}, this)">
+            <span class="option-letter">${letters[idx]}</span>
+            <span>${optText}</span>
+          </button>
+        `;
+      }).join('');
+
+      // Feedback state
+      const fb = document.getElementById('feedbackBanner');
+      if (isSolved) {
+        fb.className = 'feedback-banner success';
+        fb.innerHTML = `✅ <strong>Confirmed!</strong> ${qObj.just}`;
+      } else {
+        fb.className = 'feedback-banner';
+        fb.innerHTML = '';
+      }
+
+      // Update HUD
+      updateHUD();
+    }
+
+    function checkAnswer(selectedIndex, btnEl) {
+      const level = CAMPAIGNS[currentCampaign].levels[currentLevelIdx];
+      const qObj = level.questions[currentQuestionIdx];
+      const qKey = `${currentCampaign}_${qObj.num}`;
+      const fb = document.getElementById('feedbackBanner');
+
+      if (selectedIndex === qObj.ans) {
+        sfxCorrect();
+        btnEl.classList.add('correct');
+        const allBtns = document.querySelectorAll('#optionsGrid .option-btn');
+        allBtns.forEach(b => b.disabled = true);
+
+        if (!solvedMap[qKey]) {
+          solvedMap[qKey] = true;
+          streak++;
+          totalScore += 20 + (streak * 2);
+        }
+
+        fb.className = 'feedback-banner success';
+        fb.innerHTML = `🌟 <strong>Brilliant Cell Detective!</strong> ${qObj.just}`;
+
+        renderLevelsBar();
+        updateHUD();
+      } else {
+        sfxWrong();
+        streak = 0;
+        btnEl.classList.add('wrong');
+        setTimeout(() => btnEl.classList.remove('wrong'), 450);
+        fb.className = 'feedback-banner error';
+        fb.innerHTML = `❌ <strong>Not quite!</strong> Re-check the Detective Clue and visual model on the left, then try again!`;
+        updateHUD();
+      }
+    }
+
+    function nextQuestion() {
+      sfxClick();
+      const camp = CAMPAIGNS[currentCampaign];
+      const level = camp.levels[currentLevelIdx];
+      if (currentQuestionIdx < level.questions.length - 1) {
+        currentQuestionIdx++;
+      } else if (currentLevelIdx < camp.levels.length - 1) {
+        currentLevelIdx++;
+        currentQuestionIdx = 0;
+        sfxFanfare();
+      }
+      renderLevelsBar();
+      renderCurrentQuestion();
+    }
+
+    function prevQuestion() {
+      sfxClick();
+      const camp = CAMPAIGNS[currentCampaign];
+      if (currentQuestionIdx > 0) {
+        currentQuestionIdx--;
+      } else if (currentLevelIdx > 0) {
+        currentLevelIdx--;
+        currentQuestionIdx = camp.levels[currentLevelIdx].questions.length - 1;
+      }
+      renderLevelsBar();
+      renderCurrentQuestion();
+    }
+
+    function adjustTeamPoints(delta) {
+      sfxClick();
+      totalScore = Math.max(0, totalScore + delta);
+      updateHUD();
+    }
+
+    function updateHUD() {
+      const w5Solved = Object.keys(solvedMap).filter(k => k.startsWith('W5_')).length;
+      const w4Solved = Object.keys(solvedMap).filter(k => k.startsWith('W4_')).length;
+      const totalSolved = w5Solved + w4Solved;
+
+      document.getElementById('hudSolved').textContent = `${totalSolved} / 48`;
+      document.getElementById('hudScore').textContent = totalScore;
+      document.getElementById('hudStreak').textContent = streak;
+
+      document.getElementById('badgeW5').textContent = `${w5Solved} / 18 ⭐`;
+      document.getElementById('badgeW4').textContent = `${w4Solved} / 30 ⭐`;
+
+      const lvl = CAMPAIGNS[currentCampaign].levels[currentLevelIdx];
+      const lvlDone = lvl.questions.filter(q => solvedMap[`${currentCampaign}_${q.num}`]).length;
+      document.getElementById('levelProgressText').textContent =
+        `${lvl.name}: ${lvlDone} / ${lvl.questions.length} Stars Earned`;
+    }
+
+    // =========================================================================
+    // READ-ALOUD (TTS)
+    // =========================================================================
+    function speakQuestion() {
+      if (!('speechSynthesis' in window)) return;
+      window.speechSynthesis.cancel();
+      const level = CAMPAIGNS[currentCampaign].levels[currentLevelIdx];
+      const qObj = level.questions[currentQuestionIdx];
+      const letters = ['A', 'B', 'C', 'D'];
+      const fullText = `Question ${qObj.num}. ${qObj.q}. ` +
+        qObj.options.map((o, i) => `${letters[i]}: ${o}.`).join(' ');
+      const utter = new SpeechSynthesisUtterance(fullText);
+      utter.rate = 0.96;
+      window.speechSynthesis.speak(utter);
+    }
+
+    // =========================================================================
+    // MODALS: ANSWER KEY & CERTIFICATE
+    // =========================================================================
+    function openAnswerKey() {
+      sfxClick();
+      const letters = ['A', 'B', 'C', 'D'];
+      let html = '';
+
+      ['W5', 'W4'].forEach(campKey => {
+        const camp = CAMPAIGNS[campKey];
+        html += `<h3 style="color:var(--neon-cyan); font-family:'Fredoka',sans-serif; margin:16px 0 8px;">${camp.title}</h3>`;
+        html += `<table class="key-table"><thead><tr><th>Q#</th><th>Level / Bloom</th><th>Correct Answer</th><th>Scientific Justification</th></tr></thead><tbody>`;
+        camp.levels.forEach(lvl => {
+          lvl.questions.forEach(q => {
+            html += `
+              <tr>
+                <td><strong>${q.num}</strong></td>
+                <td>${lvl.bloom}</td>
+                <td style="color:var(--neon-green); font-weight:800;">${letters[q.ans]}) ${q.options[q.ans]}</td>
+                <td>${q.just}</td>
+              </tr>
+            `;
+          });
+        });
+        html += `</tbody></table>`;
+      });
+
+      document.getElementById('keyModalBody').innerHTML = html;
+      document.getElementById('keyModal').classList.add('open');
+    }
+
+    function closeAnswerKey() {
+      document.getElementById('keyModal').classList.remove('open');
+    }
+
+    function openCertificate() {
+      sfxFanfare();
+      const sName = document.getElementById('studentName').value.trim() || 'Master Cell Detective';
+      const tName = document.getElementById('teamName').value.trim() || 'Carnival Champions';
+      const totalSolved = Object.keys(solvedMap).length;
+
+      document.getElementById('certNameDisplay').textContent = sName;
+      document.getElementById('certTeamDisplay').textContent = `Team: ${tName}`;
+      document.getElementById('certSolved').textContent = `${totalSolved} / 48`;
+      document.getElementById('certScore').textContent = totalScore;
+      document.getElementById('certModal').classList.add('open');
+    }
+
+    function closeCertificate() {
+      document.getElementById('certModal').classList.remove('open');
+    }
+
+    // Initialize on load
+    window.addEventListener('DOMContentLoaded', () => {
+      renderLevelsBar();
+      renderCurrentQuestion();
+    });
+  </script>
+</body>
+</html>
